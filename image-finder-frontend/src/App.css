@@ -1,0 +1,94 @@
+#root {
+  max-width: 1280px;
+  margin: auto;
+  margin-top: 0;
+  text-align: center;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #1a1a1a;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.button-container {
+  padding:30px;
+}
+
+.button-container button {
+  margin: 10px;
+  width: 150px;
+}
+
+.title-page {
+  color: white;
+  font-size: 50pt;
+}
+
+.main-container { 
+
+  margin-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-container { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialog-container { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+}
+
+.close-button-container {
+  width: 50px;
+  height: 50px;
+}
+
+.close-button-container svg {
+  width: 30px;
+  height: 30px;
+}
+.dialog-container img {
+  width: 400px;
+  height: auto;
+  padding: 20px;
+}

@@ -1,0 +1,9 @@
+image-finder-frontend/node_modules
+backend/node_modules
+agent/.env
+image-finder-frontend/.env
+backend/.env
+agent/__pycache__
+agent/.env
+agent/venv
+agent/data_sources/__pycache__

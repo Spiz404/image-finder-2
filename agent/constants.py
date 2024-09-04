@@ -1,0 +1,2 @@
+EMBEDS_LENGTH = 512
+MILVUS_COLLECTION_NAME = "image_collection"
