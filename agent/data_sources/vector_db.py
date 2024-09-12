@@ -61,13 +61,13 @@ def delete_element(image_id : str):
     db_client.delete(collection_name=MILVUS_COLLECTION_NAME, pks=[image_id])
 
 # search for images
-def query(text_embeds : list[float]):
+def query(text_embeds : list[float], numresults : int):
     db_client.load_collection(collection_name=MILVUS_COLLECTION_NAME)
 
     images_elements = db_client.search(
         collection_name = MILVUS_COLLECTION_NAME,
         data = [text_embeds],
-        limit = 3,
+        limit = numresults,
         search_params = {"metric_type" : "COSINE", "params" : {}}
     )
 

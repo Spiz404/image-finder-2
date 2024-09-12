@@ -35,6 +35,7 @@ type imageItem = {
 
 type queryType = {
   query: string;
+  numresults: number;
 };
 
 imageRouter.get("/", async (req: Request, res: Response) => {
@@ -124,17 +125,22 @@ imageRouter.post("/query", express.json(), async (req: Request, res: Response) =
     axios
       .post(`${process.env.AGENT_URL}/query`, {
         query: body.query,
+        numresults: body.numresults
       })
       .then(async (agent_response) => {
 
         const data: Array<string> = agent_response.data;
+
         const urls: Array<imageItem> = await Promise.all(
+
+          // awaiting for all the images download urls
           data.map(async (image_id) => {
             const imagePath = `images/${image_id}`;
             const imageReference = ref(storage, imagePath);
             const url = await getDownloadURL(imageReference);
             return { url: url, location: imagePath };
-          }),
+          })
+
         );
 
         return res.status(200).json(urls);

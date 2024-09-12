@@ -10,6 +10,7 @@ app = FastAPI()
 
 class QueryItem(BaseModel):
     query : str
+    numresults : int
 
 class ImageItem(BaseModel):
     id : str
@@ -46,5 +47,5 @@ async def delete(imageItem : ImageItem):
 async def query(queryItem : QueryItem):
 
     text_embeds = getTextEmbeddings(queryItem.query)
-    data = vector_db.query(text_embeds)
+    data = vector_db.query(text_embeds, queryItem.numresults)
     return data

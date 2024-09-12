@@ -23,7 +23,8 @@ const Sb = ({setData} : {setData : (data : Array<imageItem>) => void}) => {
 
       axios.post(`${import.meta.env.VITE_BACKEND_URL}/images/query`, 
         {
-          query : search
+          query : search,
+          numresults: numResults
         }, 
         {
           headers : {
@@ -35,19 +36,19 @@ const Sb = ({setData} : {setData : (data : Array<imageItem>) => void}) => {
     };
 
     return (
-      <div>
+      <div className='query-items-container'>
         <SearchBar
           width = '500px'
+          height = '50px'
           value={search}
           onChange={(text : string) => setSearch(text)}
           onSearch={handleSearch}
         />
-        <FormControl color="primary" sx={{ m: 1, minWidth: 120, borderRadius: "4px", borderColor: "white" }}>
-          <InputLabel id="num-results-label" color = "info" sx={{color: "white"}} >Risultati</InputLabel>
+        <FormControl sx={{ m: 1, minWidth: 120, borderRadius: "4px"}}>
+          <InputLabel id="num-results-label">Risultati</InputLabel>
           <Select
             labelId="num-results-label"
             id="num-results-select"
-            style = {{color : "white"}}
             value={`${numResults}`}
             label="Risultati"
             onChange={handleNumResultsChange}

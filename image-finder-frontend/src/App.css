@@ -92,3 +92,10 @@ h1 {
   height: auto;
   padding: 20px;
 }
+
+.query-items-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
