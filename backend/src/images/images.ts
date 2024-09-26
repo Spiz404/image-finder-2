@@ -13,7 +13,6 @@ import multer from "multer";
 import express from "express";
 import axios from "axios";
 import FormData from "form-data";
-
 require("dotenv").config();
 
 interface MulterRequest extends Request {
@@ -57,10 +56,10 @@ imageRouter.get("/", async (req: Request, res: Response) => {
 imageRouter.delete("/", express.json(), async (req: Request, res: Response) => {
   const { image } = req.body;
   console.log(image);
-  const imageId : string = image.split("/").pop();
+  const imageId: string = image.split("/").pop();
 
   const imageRef = ref(storage, image);
-  
+
   deleteObject(imageRef)
     .then((result) => {
       axios.post(`${process.env.AGENT_URL}/delete`, {
@@ -77,8 +76,10 @@ imageRouter.delete("/", express.json(), async (req: Request, res: Response) => {
     });
 });
 
-imageRouter.post("/upload", upload.single("image"), async (req: MulterRequest, res: Response) => {
-
+imageRouter.post(
+  "/upload",
+  upload.single("image"),
+  async (req: MulterRequest, res: Response) => {
     if (req.file) {
       // add image to images
       const docRef = await addDoc(collection(db, "images"), {});
@@ -117,30 +118,29 @@ imageRouter.post("/upload", upload.single("image"), async (req: MulterRequest, r
   },
 );
 
-imageRouter.post("/query", express.json(), async (req: Request, res: Response) => {
-
+imageRouter.post(
+  "/query",
+  express.json(),
+  async (req: Request, res: Response) => {
     console.log("query request");
     const body: queryType = req.body;
     console.log(body);
     axios
       .post(`${process.env.AGENT_URL}/query`, {
         query: body.query,
-        numresults: body.numresults
+        numresults: body.numresults,
       })
       .then(async (agent_response) => {
-
         const data: Array<string> = agent_response.data;
 
         const urls: Array<imageItem> = await Promise.all(
-
           // awaiting for all the images download urls
           data.map(async (image_id) => {
             const imagePath = `images/${image_id}`;
             const imageReference = ref(storage, imagePath);
             const url = await getDownloadURL(imageReference);
             return { url: url, location: imagePath };
-          })
-
+          }),
         );
 
         return res.status(200).json(urls);
