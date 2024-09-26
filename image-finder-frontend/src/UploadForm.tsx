@@ -9,8 +9,8 @@ interface UploadFormProps {
 // stateFun is a function that closes the upload modal
 
 const UploadForm: React.FC<UploadFormProps> = ({ stateFun }) => {
-  const handleChange = (e) => {
-    const image: File = e.target.files[0];
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const image: File = e?.target?.files[0];
     console.log(image);
     const formData = new FormData();
     formData.set("image", image);
@@ -19,7 +19,7 @@ const UploadForm: React.FC<UploadFormProps> = ({ stateFun }) => {
     // post request to upload image
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/images/upload`, formData)
-      .then((data) => {
+      .then(() => {
         console.log("success");
       })
       .catch((err) => {
